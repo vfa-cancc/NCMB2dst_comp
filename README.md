@@ -5,6 +5,7 @@
 サーバーには[ニフティクラウド mobile backend](http://mb.cloud.nifty.com/)を利用します。
 
 詳細資料は下記↓
+
 http://www.slideshare.net/fumisatokawahara/unity-58145478
 
 ※Unity5.3での動作を確認しています
