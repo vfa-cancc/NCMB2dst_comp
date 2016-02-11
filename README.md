@@ -139,3 +139,13 @@ query.FindAsync ((List<NCMBObject> objList ,NCMBException e) => {
 		}
 	});
 ```
+## ゴーストの表示
+
+ゴースト機能は主に下記の2つからできています
+
+- ニフティクラウドmobile backendから1位の"Log"を引っ張る
+- "Log"をつかってGameObjectを操作する
+
+### "Log"を引き出す
+
+### "Log"を使いGameObjectを操作する
