@@ -2,7 +2,7 @@
 
 ## はじめに
 本プロジェクトはUnityの[2D Shooting Game](https://github.com/unity3d-jp-tutorials/2d-shooting-game/wiki)に　オンラインランキング・ゴースト機能を追加したデモを楽しめるものです。
-サーバーには[ニフティクラウド mobile backend](http://mb.cloud.nifty.com/)を利用します。
+サーバーには[ニフクラ mobile backend](http://mb.cloud.nifty.com/)を利用します。
 
 詳細資料は下記↓
 
@@ -10,9 +10,9 @@ http://www.slideshare.net/fumisatokawahara/unity-58145478
 
 ※Unity5.3での動作を確認しています
 
-##　※自分でニフティクラウド mobile backendを利用する方へ
+##　※自分でニフクラ mobile backendを利用する方へ
 
-ニフティクラウド mobile backendを使われる際は自分のプロジェクトにSDKを導入する必要があります。
+ニフクラ mobile backendを使われる際は自分のプロジェクトにSDKを導入する必要があります。
 下記のクイックスタートからそちらを行ってください
 
 http://mb.cloud.nifty.com/doc/current/introduction/quickstart_unity.html
@@ -112,7 +112,7 @@ LeaderBoardシーンには以下のスクリプトが含まれています。
 
 ### ロジック説明
 
-ニフティクラウド mobile backendから子スコアのデータを取得するロジックは
+ニフクラ mobile backendから子スコアのデータを取得するロジックは
 Asset>Scripts 「LeaderBoard.cs」に記載されています。
 
 ```
@@ -153,7 +153,7 @@ query.FindAsync ((List<NCMBObject> objList ,NCMBException e) => {
 
 ゴースト機能は主に下記の2つからできています
 
-- ニフティクラウドmobile backendから1位の"Log"を引っ張る
+- ニフクラmobile backendから1位の"Log"を引っ張る
 - "Log"をつかってGameObjectを操作する
 
 ### "Log"を引き出す
