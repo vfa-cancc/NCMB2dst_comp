@@ -2,55 +2,54 @@
 
 ## はじめに
 本プロジェクトはUnityの[2D Shooting Game](https://github.com/unity3d-jp-tutorials/2d-shooting-game/wiki)に　オンラインランキング・ゴースト機能を追加したデモを楽しめるものです。
-サーバーには[ニフクラ mobile backend](http://mb.cloud.nifty.com/)を利用します。
+サーバーには[ニフクラ mobile backend](https://mbaas.nifcloud.com)を利用します。
 
 詳細資料は下記↓
 
 http://www.slideshare.net/fumisatokawahara/unity-58145478
 
-※Unity5.3での動作を確認しています
+※Unity 2019.2.17f1での動作を確認しています
 
-##　※自分でニフクラ mobile backendを利用する方へ
+## ※自分でニフクラ mobile backendを利用する方へ
 
 ニフクラ mobile backendを使われる際は自分のプロジェクトにSDKを導入する必要があります。
 下記のクイックスタートからそちらを行ってください
 
-http://mb.cloud.nifty.com/doc/current/introduction/quickstart_unity.html
+https://mbaas.nifcloud.com/doc/current/introduction/quickstart_unity.html
 
-##スコア保存
+## スコア保存
 
 ### スコア保存のコード説明
 
 スコア保存のコードはAsset>Scriptsの「SaveScore.cs」にて行っています。
 下記のコードが、スコア保存に関するコードになります、ご参照ください。
 
-```
+```csharp
 //mobile backendのSDKを読み込む
-using NCMB; 
+using NCMB;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class SaveScore : MonoBehaviour {
+public class SaveScore: MonoBehaviour {
 	// mobile backendに接続---------------------
-	---
-	public void save( string name, int score ) {
-	  //データストアにスコアクラスを定義
-	    //あらかじめ定義していない場合は自動で作成される
-		NCMBObject obj = new NCMBObject ("Score");
-		
-		//obj["name"]でKeyを　=nameでvalueを設定
-		obj ["name"] = name;
-		
-		//obj["score"]でKeyを　=scoreでvalueを設定
-		obj ["score"] = score;
-		
+	public void save(string name, int score) {
+		//データストアにスコアクラスを定義
+		//あらかじめ定義していない場合は自動で作成される
+		NCMBObject obj = new NCMBObject("Score");
+
+		//obj["name"]でKeyを　= nameでvalueを設定
+		obj["name"] = name;
+
+		//obj["score"]でKeyを　= scoreでvalueを設定
+		obj["score"] = score;
+
 		//obj["Log"]でKeyを　= Player.posListでvalueを設定
-		  //走行ログの取得方法は後述
-		obj ["Log"] = Player.posList;
-		
+		//走行ログの取得方法は後述
+		obj["Log"] = Player.posList;
+
 		//この処理でサーバーに書き込む
-		obj.SaveAsync ();
+		obj.SaveAsync();
 	}
 }
 ```
@@ -61,33 +60,29 @@ public class SaveScore : MonoBehaviour {
 コードとしてはAsset>Scriptsの「Player.cs」にて行っています。
 下記のコードをご参照ください。
 
-```
-
-public class Player : MonoBehaviour
-{
+```csharp
+public class Player: MonoBehaviour {
 	// 配列を定義しておく
-	public static List<float[]> posList = new List<float[]>();
-  ・
-  ・
-  ・省略
-  // 機体の移動
-	  void Move (Vector2 direction)
-	  {
-  	・
-  	・
-    ・省略
-  		//---ゴーストをつくるため、ポジションをリスト化する-----
-	  	float[] postion = new float[2];
-	  	postion [0] = transform.position.x;
-	  	postion [1] = transform.position.y;
-	  	posList.Add(postion);
-	  	//----------------------------------------------
-	  }
-	 ・
-	 ・
-	 ・省略
-  }
-  
+	public static List < float[] > posList = new List < float[] > ();
+
+	/* 省略 */
+
+	// 機体の移動
+	void Move(Vector2 direction) {
+
+		/* 省略 */
+
+		//---ゴーストをつくるため、ポジションをリスト化する-----
+		float[] postion = new float[2];
+		postion[0] = transform.position.x;
+		postion[1] = transform.position.y;
+		posList.Add(postion);
+		//----------------------------------------------
+	}
+
+	/* 省略 */
+
+}
 ```
 
 ## オンラインランキングの表示
@@ -115,39 +110,39 @@ LeaderBoardシーンには以下のスクリプトが含まれています。
 ニフクラ mobile backendから子スコアのデータを取得するロジックは
 Asset>Scripts 「LeaderBoard.cs」に記載されています。
 
-```
+```csharp
 // データストアの「Score」クラスから検索
-NCMBQuery<NCMBObject> query = new NCMBQuery<NCMBObject> ("Score");
+NCMBQuery < NCMBObject > query = new NCMBQuery < NCMBObject > ("Score");
 
 //「Score」クラスの「score」カラムを降順に並び替え
-query.OrderByDescending ("score");
+query.OrderByDescending("score");
 
 //上位5個のみ取得
 query.Limit = 5;
 
 //実際に取得
-query.FindAsync ((List<NCMBObject> objList ,NCMBException e) => {
-	//	非同期の処理
+query.FindAsync((List < NCMBObject > objList, NCMBException e) = >{
+	//非同期の処理
 	if (e != null) {
 		//検索失敗時の処理
 	} else {
 		//検索成功時の処理
-		List<NCMB.Rankers> list = new List<NCMB.Rankers>();
-		
+		List < NCMB.Rankers > list = new List < NCMB.Rankers > ();
+
 		// 取得したレコードをscoreクラスとして保存
-		foreach (NCMBObject obj in objList) {
-		
-		  //引き出したオブジェクトからscoreだけを取り出す
-			int  s = System.Convert.ToInt32(obj["score"]);
-		
+		foreach(NCMBObject obj in objList) {
+
+			//引き出したオブジェクトからscoreだけを取り出す
+			int s = System.Convert.ToInt32(obj["score"]);
+
 			//引き出したオブジェクトからnameだけを取り出す
 			string n = System.Convert.ToString(obj["name"]);
-		
-			list.Add( new Rankers( s, n ) );
+
+			list.Add(new Rankers(s, n));
 		}
-			topRankers = list;
-		}
-	});
+		topRankers = list;
+	}
+});
 ```
 ## ゴーストの表示
 
@@ -160,73 +155,71 @@ query.FindAsync ((List<NCMBObject> objList ,NCMBException e) => {
 
 "Log"を引出すコードはSatgeシーンを起動した際に呼び出すBg_ghost.csに実装しています。
 
-```
+```csharp
 using NCMB; //mobile backendのSDKを読み込む
-・
-・
-・省略
-public class Bg_ghost : MonoBehaviour {
+/* 省略 */
+
+public class Bg_ghost: MonoBehaviour {
 	public static NCMBObject posObj;
 	public static bool readyGhost = false;
-	
-	void Start () {
+
+	void Start() {
 		// データストアの「Score」クラスから検索
-		NCMBQuery<NCMBObject> query = new NCMBQuery<NCMBObject> ("Score");
+		NCMBQuery < NCMBObject > query = new NCMBQuery < NCMBObject > ("Score");
 
 		//「Score」クラスの「score」カラムを降順に並び替え
-		query.OrderByDescending ("score");
-		
+		query.OrderByDescending("score");
+
 		//上位1個のみ取得
 		query.Limit = 1;
-		
-		//実際に取得
-		query.FindAsync ((List<NCMBObject> objList,NCMBException e)=>{
 
-			if(e !=null){
+		//実際に取得
+		query.FindAsync((List < NCMBObject > objList, NCMBException e) = >{
+
+			if (e != null) {
 				//検索失敗時の処理
-			}else{
+			} else {
 				//検索成功時の処理
 				//取得したレコードをscoreクラスとして保存
-				if(objList.Count > 0){
+				if (objList.Count > 0) {
 					Debug.Log("GhostData");
 					readyGhost = true;
-					foreach(NCMBObject obj in objList){
+					foreach(NCMBObject obj in objList) {
 						posObj = obj;
 					}
 				}
 			}
 		});
 	}
+}
 ```
 
 ### "Log"を使いGameObjectを操作する
 
 GhostのGameObjectにはGhost.csというスクリプトがアタッチされており、そこで"Log"をつかってGameObjectを操作するコードが書かれています。
 
-```
+```csharp
 using NCMB; //mobile backendのSDKを読み込む
-・
-・
-・省略
-public class Ghost : MonoBehaviour {
-・
-・
-・省略
-	
-//---Bg_ghost.csで取得したゴーストデータを利用し、ゴーストを操作する
-void Update () {
-	if (flameCount < limit) {
-		//Bg_ghostの取得データから"Log"データをとりだし、x座標y座標成分に分ける
-		float x = (float)System.Convert.ToDouble (((ArrayList)((ArrayList)Bg_ghost.posObj ["Log"]) [flameCount]) [0]);
-		float y = (float)System.Convert.ToDouble (((ArrayList)((ArrayList)Bg_ghost.posObj ["Log"]) [flameCount]) [1]);
-		//x,y座標に移動させる
-		transform.position = new Vector2 (x, y);
-		flameCount++;
-	} else {
-		//"Log"がなくなればGameObjectを削除
-		Destroy(this.gameObject);
+/* 省略 */
+
+public class Ghost: MonoBehaviour {
+
+	/* 省略 */
+
+	//---Bg_ghost.csで取得したゴーストデータを利用し、ゴーストを操作する
+	void Update() {
+		if (flameCount < limit) {
+			//Bg_ghostの取得データから"Log"データをとりだし、x座標y座標成分に分ける
+			float x = (float) System.Convert.ToDouble(((ArrayList)((ArrayList) Bg_ghost.posObj["Log"])[flameCount])[0]);
+			float y = (float) System.Convert.ToDouble(((ArrayList)((ArrayList) Bg_ghost.posObj["Log"])[flameCount])[1]);
+			//x,y座標に移動させる
+			transform.position = new Vector2(x, y);
+			flameCount++;
+		} else {
+			//"Log"がなくなればGameObjectを削除
+			Destroy(this.gameObject);
+		}
 	}
-}
 	//------------------------------------------------------------------
 }
 ```
