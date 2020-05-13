@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+#if UNITY_2019_3_OR_NEWER
+using UnityEngine.SceneManagement;
+#endif
 public class ScoreUI : MonoBehaviour {
 	
 	private GameObject guiTextSaveScore;   // SaveScore Text
@@ -26,9 +28,13 @@ public class ScoreUI : MonoBehaviour {
 		// ボタンが押されたら
 		if (SubmitButton) {
 			FindObjectOfType<SaveScore> ().save (name, score);
-			Application.LoadLevel ("Stage");
+#if UNITY_2019_3_OR_NEWER
+			SceneManager.LoadScene("Stage");
+#else
+			Application.LoadLevel("Stage");
+#endif
 		}
-		
+
 	}
 	
 	private void drawSaveScore()

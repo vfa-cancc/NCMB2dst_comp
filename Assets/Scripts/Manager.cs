@@ -1,4 +1,7 @@
 ﻿using UnityEngine;
+#if UNITY_2019_3_OR_NEWER
+using UnityEngine.SceneManagement;
+#endif
 
 public class Manager : MonoBehaviour
 {
@@ -28,7 +31,11 @@ public class Manager : MonoBehaviour
 
 			// ランキングボタンが押されたら
 			if ( leaderBoardButton )
+#if UNITY_2019_3_OR_NEWER
+				SceneManager.LoadScene("LeaderBoard");
+#else
 				Application.LoadLevel("LeaderBoard");
+#endif
 
 			//—--ゴーストボタンが押下場合の挙動定義---------
 			if ( ghostButton )
@@ -57,11 +64,15 @@ public class Manager : MonoBehaviour
 	public void GameOver ()
 	{
 		FindObjectOfType<Score> ().Save ();
-		Application.LoadLevel ("SaveScore");
+#if UNITY_2019_3_OR_NEWER
+		SceneManager.LoadScene("SaveScore");
+#else
+		Application.LoadLevel("SaveScore");
+#endif
 		// ゲームオーバー時に、タイトルを表示する
 		//title.SetActive (true);
 	}
-	
+
 	public bool IsPlaying ()
 	{
 		// ゲーム中かどうかはタイトルの表示/非表示で判断する

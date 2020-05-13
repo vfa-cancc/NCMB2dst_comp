@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+#if UNITY_2019_3_OR_NEWER
+using UnityEngine.SceneManagement;
+#endif
 
 public class LeaderBoardManager : MonoBehaviour {
 	
@@ -41,7 +44,7 @@ public class LeaderBoardManager : MonoBehaviour {
 			
 			// 取得したトップ5ランキングを表示
 			for( int i = 0; i < lBoard.topRankers.Count; ++i) {
-				top[i].GetComponent<GUIText>().text = i+1 + ". " + lBoard.topRankers[i].print();
+				top[i].GetComponent<UnityEngine.UI.Text>().text = i + 1 + ". " + lBoard.topRankers[i].print();
 			}
 
 			isLeaderBoardFetched = true;
@@ -52,9 +55,13 @@ public class LeaderBoardManager : MonoBehaviour {
 		drawMenu();
 		// 戻るボタンが押されたら
 		if( backButton )
-			Application.LoadLevel("Stage");
+#if UNITY_2019_3_OR_NEWER
+			SceneManager.LoadScene("Stage");
+#else
+            Application.LoadLevel("Stage");
+#endif
 	}
-	
+
 	private void drawMenu() {
 		// ボタンの設置
 		int btnW = 170, btnH = 30;

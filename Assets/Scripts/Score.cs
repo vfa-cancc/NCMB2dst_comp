@@ -3,13 +3,13 @@
 public class Score : MonoBehaviour
 {
 	// スコアを表示するGUIText
-	public GUIText scoreGUIText;
+	public UnityEngine.UI.Text scoreGUIText;
 	
 	// ハイスコアを表示するGUIText
 	//public GUIText highScoreGUIText;
 
 	// ハイスコアを表示するGUIText
-	public GUIText saveScoreGUIText = null;
+	public UnityEngine.UI.Text saveScoreGUIText = null;
 
 	// スコア
 	private int score;
