@@ -43,7 +43,7 @@ RenderSettings:
 --- !u!157 &4
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 11
+  serializedVersion: 12
   m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -96,8 +96,10 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_LightingSettings: {fileID: 4890085278179872738, guid: dab581ba673014dd1853b6c2c32c19c7,
+    type: 2}
 --- !u!196 &5
 NavMeshSettings:
   serializedVersion: 2
@@ -117,6 +119,8 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
+    maxJobWorkers: 0
+    preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
@@ -172,7 +176,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 198991672}
-  - component: {fileID: 198991673}
   m_Layer: 0
   m_Name: Tap To Start
   m_TagString: Untagged
@@ -194,30 +197,6 @@ Transform:
   m_Father: {fileID: 1223237852}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!132 &198991673
-GUIText:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 198991671}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Text: Tap To Start
-  m_Anchor: 1
-  m_Alignment: 0
-  m_PixelOffset: {x: 0, y: 0}
-  m_LineSpacing: 1
-  m_TabSize: 4
-  m_Font: {fileID: 12800000, guid: 5cf0eb48b4e374640bcc157a5f4a7284, type: 3}
-  m_Material: {fileID: 0}
-  m_FontSize: 60
-  m_FontStyle: 0
-  m_Color:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_PixelCorrect: 1
-  m_RichText: 1
 --- !u!1 &291862730
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,8 +318,6 @@ GameObject:
   m_Component:
   - component: {fileID: 631123292}
   - component: {fileID: 631123291}
-  - component: {fileID: 631123290}
-  - component: {fileID: 631123289}
   - component: {fileID: 631123288}
   m_Layer: 0
   m_Name: Main Camera
@@ -351,22 +328,6 @@ GameObject:
   m_IsActive: 1
 --- !u!81 &631123288
 AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 631123287}
-  m_Enabled: 1
---- !u!124 &631123289
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 631123287}
-  m_Enabled: 1
---- !u!92 &631123290
-Behaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -439,7 +400,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 985634075}
-  - component: {fileID: 985634076}
   m_Layer: 0
   m_Name: SaveScore
   m_TagString: Untagged
@@ -461,30 +421,6 @@ Transform:
   m_Father: {fileID: 2067825619}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!132 &985634076
-GUIText:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 985634074}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Text: 
-  m_Anchor: 6
-  m_Alignment: 0
-  m_PixelOffset: {x: 0, y: 0}
-  m_LineSpacing: 1
-  m_TabSize: 4
-  m_Font: {fileID: 12800000, guid: 5cf0eb48b4e374640bcc157a5f4a7284, type: 3}
-  m_Material: {fileID: 0}
-  m_FontSize: 24
-  m_FontStyle: 0
-  m_Color:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_PixelCorrect: 1
-  m_RichText: 1
 --- !u!1 &1110756357
 GameObject:
   m_ObjectHideFlags: 0
@@ -870,7 +806,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1948539130}
-  - component: {fileID: 1948539129}
   m_Layer: 0
   m_Name: Shooting Game
   m_TagString: Untagged
@@ -878,30 +813,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!132 &1948539129
-GUIText:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1948539128}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Text: Shooting Game
-  m_Anchor: 1
-  m_Alignment: 0
-  m_PixelOffset: {x: 0, y: 0}
-  m_LineSpacing: 1
-  m_TabSize: 4
-  m_Font: {fileID: 12800000, guid: 5cf0eb48b4e374640bcc157a5f4a7284, type: 3}
-  m_Material: {fileID: 0}
-  m_FontSize: 60
-  m_FontStyle: 0
-  m_Color:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_PixelCorrect: 1
-  m_RichText: 1
 --- !u!4 &1948539130
 Transform:
   m_ObjectHideFlags: 0
@@ -925,7 +836,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1949279606}
-  - component: {fileID: 1949279607}
   m_Layer: 0
   m_Name: Score
   m_TagString: Untagged
@@ -947,30 +857,6 @@ Transform:
   m_Father: {fileID: 2067825619}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!132 &1949279607
-GUIText:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1949279605}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Text: 0
-  m_Anchor: 2
-  m_Alignment: 0
-  m_PixelOffset: {x: 0, y: 0}
-  m_LineSpacing: 1
-  m_TabSize: 4
-  m_Font: {fileID: 12800000, guid: 5cf0eb48b4e374640bcc157a5f4a7284, type: 3}
-  m_Material: {fileID: 0}
-  m_FontSize: 24
-  m_FontStyle: 0
-  m_Color:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_PixelCorrect: 1
-  m_RichText: 1
 --- !u!1 &1962370229
 GameObject:
   m_ObjectHideFlags: 0
@@ -1000,8 +886,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00b380f8c25764501b06a9787d08e3ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  applicationKey: 
-  clientKey: 
+  applicationKey: 0730e01abce99ac3d5400690cb658a25f79e8f0bac8895dd67283e9b98077d1e
+  clientKey: d4175a28a524d55c47057f6f77b47c0c654842521b94488442867c82deb83dac
   usePush: 0
   useAnalytics: 0
   responseValidation: 0
@@ -1064,5 +950,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4e3c3d33eb234893873ea96b9088c83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreGUIText: {fileID: 1949279607}
-  saveScoreGUIText: {fileID: 985634076}
+  scoreGUIText: {fileID: 0}
+  saveScoreGUIText: {fileID: 0}
