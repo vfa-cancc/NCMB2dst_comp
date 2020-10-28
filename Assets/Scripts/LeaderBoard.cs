@@ -1,14 +1,14 @@
 ﻿using NCMB;
 using System.Collections;
 using System.Collections.Generic;
-
+using System;
 public class LeaderBoard {
 	
 	public int currentRank = 0;
 	public List<NCMB.Rankers> topRankers = null;
 	
 	// サーバーからトップ5を取得 ---------------    
-	public void fetchTopRankers()
+	public void fetchTopRankers(Action completed)
 	{
 		// データストアの「Score」クラスから検索
 
@@ -30,6 +30,7 @@ public class LeaderBoard {
 					list.Add( new Rankers( s, n ) );
 				}
 				topRankers = list;
+				completed.Invoke();
 			}
 		});
 	}
